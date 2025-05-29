@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?&family=Roboto:wght@300;500&family=Abril+Fatface&family=Noto+Sans+KR:wght@400;500&family=Archivo&family=Cinzel+Decorative:wght@400;700;900&display=swap');
+
+/* style reset */
+* {
+	margin:0;
+	padding:0;
+	outline:none;
+	box-sizing:border-box;
+	text-size-adjust:none;    
+	-webkit-overflow-scrolling:touch;
+}
+html {
+	width:100%; 
+	height:100%;
+}
+body {
+	width:100%; 
+	min-width:1200px;
+	height:100%; 
+	overflow: hidden;
+	color:#666; 
+	font-size:15px;
+	word-wrap: break-word;
+	word-break:keep-all;
+	background-color:#fbf8f8;
+} 
+ul, ol, li {
+	list-style:none;
+}
+a {
+	text-decoration:none;
+	color:inherit;
+	cursor:pointer;
+}
+em, address, i {
+	font-style:normal;
+}
+caption {
+	visibility:hidden;
+	overflow:hidden;
+	width:0;
+	height:0;    
+	font-size:0;
+}
+hr {
+	display:none;
+}
+pre {
+	white-space:pre-line;
+	word-break:break-all;
+}
+img {
+	border:0;
+}
+button {
+	background:none;
+	border:0;
+	vertical-align:middle;
+	cursor:pointer;
+}
+
+img, input, select, textarea {
+	vertical-align:middle
+}
+
+body, button, input, textarea, select {
+	font-family: 'Archivo', 'Noto Sans KR', sans-serif, serif, Dotum, Arial,;
+}
+
+#root{
+	position: relative;
+	width:100%;
+	height:100%;
+}
+.default{
+	background-color:#fff;
+}
+.rootWrap{
+	border:20px solid #ebebeb
+}

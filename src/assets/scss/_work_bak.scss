@@ -1,0 +1,116 @@
+.work{
+  width:calc(100% - 40px);
+  margin:0 20px;
+  height:calc(100% - 135px);
+  overflow:hidden;
+  background-color:#f2f2f2;
+  opacity:0;
+  transform:scale(0.8);
+  transition:1s;
+  &.isWork{
+    opacity:1;
+    transform:scale(1);
+  }
+
+  .list{
+    max-width:1200px;
+    overflow:hidden;
+    margin:0 auto;
+    padding-top:50px;
+    ul{
+      width:100%;
+    }
+    li{
+      float:left;
+      width:calc(100% / 3);
+      padding-bottom:40px;
+    }
+    li a{
+      position: relative;
+      display:block;
+      max-width:350px;
+      margin:0 5px;
+      padding-bottom:20%;
+      background-color:#fff;
+      box-shadow:0px 0px 3px 0px rgba(0,0,0,0.20);
+      figure{
+        position: relative;
+        padding-top:58.571%;
+        //padding-top:82.571%;
+        //padding-top:62.571%;
+        width:100%;
+        overflow: hidden;
+        transition:1s;
+        i{
+          position: absolute;
+          top:10px;
+          right:10px;
+          z-index:2;
+          width:57px;
+          height:57px;
+          text-align: center;
+          color:#fff;
+          line-height: 3.8;
+          border-radius:50%;
+          background-color:#e74c3c;
+        }
+        img{
+          position: absolute;
+          left:50%;
+          top:50%;
+          width:100%;
+          transform: translate(-50%, -50%);
+          transition:1s;
+        }
+      }
+      dl{
+        position: absolute;
+        left:0;
+        bottom:0;
+        width:100%;
+        padding:15px 20px;
+        background-color:#fff;
+        dt{
+          padding-bottom:10px;
+          color:#222;
+          font-size:16px;
+        }
+        .text{
+          overflow: hidden;
+          height:0;
+          line-height:1.7;
+          transition:0.8s;
+          opacity:0;
+          margin-bottom:0;
+          color:#e74c3c;
+          span{
+            display:block;
+          }
+        }
+        .tools{
+          font-family: verdana;
+          font-size: 11px;
+          color: #b5b5b5;
+        }
+      }
+    }
+    li a:hover{
+      figure{
+        img{
+          transform: translate(-50%, -60%);
+          filter: grayscale(1);
+        }
+      }
+      dl{
+        .text{
+          height:120px;
+          opacity: 1;
+          transition:1.3s;
+        }
+      }
+    }
+  }
+}
+.scrollarea{
+  height: 800px;
+}
