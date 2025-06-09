@@ -32,7 +32,7 @@ const WorkList = ({ worksData, ulRef, currentRef, activeNum, obj }) => {
                 <motion.div
                   style={active ? { translateX: thumX, translateY: thumY } : {}}
                 >
-                  <img src={require(`assets/resources/${thum}`).default} />
+                  <img src={`/resources/${thum}`} alt="" />
                 </motion.div>
               </figure>
               <motion.div

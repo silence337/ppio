@@ -1,6 +1,3 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-
 const HistoryList = ({ historyData, listRef, currentRef, historyNum }) => {
   return (
     <ul ref={listRef}>
@@ -11,6 +8,7 @@ const HistoryList = ({ historyData, listRef, currentRef, historyNum }) => {
           <li
             className={`${active ? 'active' : ''}`}
             ref={active ? currentRef : null}
+            key={idx}
           >
             <strong>{year}</strong>
             <span className="type">{type}</span>

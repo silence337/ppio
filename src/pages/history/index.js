@@ -1,11 +1,15 @@
+import { motion, AnimatePresence } from 'framer-motion';
 import React, { useRef, useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { useOutletContext } from 'react-router-dom';
 import ReactScrollWheelHandler from 'react-scroll-wheel-handler';
 import { useSelector, useDispatch } from 'react-redux';
 import { hList } from 'store/HistoryReducer';
 import List from 'components/history/List';
 
-const History = ({ pathClassName }) => {
+const History = () => {
+  const context = useOutletContext();
+  const pathClassName = context?.path;
+  console.log(pathClassName);
   const dispatch = useDispatch();
   const historyData = useSelector((state) => state.history);
   const listRef = useRef(null);
@@ -52,9 +56,6 @@ const History = ({ pathClassName }) => {
     ease: 'linear',
     delay: 0,
     duration: 0.6,
-    transition: {
-      //delayChildren: 0.4,
-    },
   };
 
   const progress = (s) => {
@@ -71,39 +72,38 @@ const History = ({ pathClassName }) => {
   }, []);
 
   return (
-    <motion.div
-      className={'history'}
-      initial="initial"
-      animate="in"
-      exit="exit"
-      variants={pageVariants}
-      transition={pageTransition}
-    >
-      <ReactScrollWheelHandler
-        upHandler={prev}
-        downHandler={next}
-        wheelConfig={[9, 100, 0.02]}
-        customStyle={{
-          width: '100%',
-          height: '100%',
-        }}
+    <AnimatePresence mode="wait">
+      <motion.div
+        className={'history'}
+        initial="initial"
+        animate="in"
+        exit="exit"
+        variants={pageVariants}
+        transition={pageTransition}
       >
-        <span className="progress">
-          <span ref={bar}></span>
-        </span>
-        <div
-          className={'list' + (pathClassName === 'isHistory' ? ' show' : '')}
+        <ReactScrollWheelHandler
+          upHandler={prev}
+          downHandler={next}
+          wheelConfig={[9, 100, 0.02]}
+          style={{width: '100%', height: '100%'}}
         >
-          <List
-            historyData={historyData}
-            listRef={listRef}
-            currentRef={currentRef}
-            historyNum={historyNum}
-          />
-          <span className="circle"></span>
-        </div>
-      </ReactScrollWheelHandler>
-    </motion.div>
+          <span className="progress">
+            <span ref={bar}></span>
+          </span>
+          <div
+            className={`list${pathClassName === 'isHistory' ? ' show' : ''}`}
+          >
+            <List
+              historyData={historyData}
+              listRef={listRef}
+              currentRef={currentRef}
+              historyNum={historyNum}
+            />
+            <span className="circle"></span>
+          </div>
+        </ReactScrollWheelHandler>
+      </motion.div>
+    </AnimatePresence>
   );
 };
 export default History;

@@ -15,8 +15,7 @@ const workSlice = createSlice({
 export default workSlice.reducer;
 
 const { setDataSuccess } = workSlice.actions;
-export const setData =
-  ({ data }) =>
+export const setData = ({ data }) =>
   async (dispatch) => {
     try {
       //console.log(data);
