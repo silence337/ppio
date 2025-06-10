@@ -1,9 +1,9 @@
 @charset "utf-8";
 
-@import '_reset';
-@import '_main';
-@import '_work';
-@import '_history';
+@use '_reset' as *;
+@use '_main' as *;
+@use '_work' as *;
+@use '_history' as *;
 
 header {
     position: relative;
