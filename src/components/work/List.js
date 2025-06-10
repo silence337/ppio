@@ -10,6 +10,7 @@ const WorkList = ({ worksData, ulRef, currentRef, activeNum, obj }) => {
     }
     window.open(e);
   };
+  
 
   return (
     <ul ref={ulRef}>
@@ -22,8 +23,7 @@ const WorkList = ({ worksData, ulRef, currentRef, activeNum, obj }) => {
             className={`${active ? 'active' : ''}`}
             ref={active ? currentRef : null}
           >
-            <a
-              href="#"
+            <a href={undefined}
               onClick={() => url(link)}
               rel="noopener noreferrer"
               style={{ perspective: 400 }}
@@ -32,7 +32,7 @@ const WorkList = ({ worksData, ulRef, currentRef, activeNum, obj }) => {
                 <motion.div
                   style={active ? { translateX: thumX, translateY: thumY } : {}}
                 >
-                  <img src={`/resources/${thum}`} alt="" />
+                  <img src={`/data/${thum}.jpg`} alt="" />
                 </motion.div>
               </figure>
               <motion.div

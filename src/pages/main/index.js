@@ -1,11 +1,11 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import Video from 'assets/resources/m.mp4';
 
 const Main = () => {
   const video = useRef(null);
   const wave = useRef(null);
-  let isPlaying = false;
+  const [isPlaying, setIsPlaying] = useState(false);
 
   const pageVariants = {
     initial: {
@@ -31,7 +31,7 @@ const Main = () => {
     duration: 1.4,
   };
 
-  const videoPlay = (e) => {
+  const videoPlay = useCallback(() => {
     if (isPlaying) {
       return;
     }
@@ -41,7 +41,7 @@ const Main = () => {
     if (play !== undefined) {
       play
         .then((_) => {
-          isPlaying = true;
+          setIsPlaying(true);
 
           video.current.addEventListener('timeupdate', (e) => {
             if (!wave.current) {
@@ -49,7 +49,7 @@ const Main = () => {
             }
             let currentTime = e.target.currentTime;
             if (e.target.ended) {
-              isPlaying = false;
+              setIsPlaying(false);
             }
             //console.log(currentTime);
             if (currentTime > 2) {
@@ -62,11 +62,11 @@ const Main = () => {
         })
         .catch((error) => {});
     }
-  };
+  }, [isPlaying]);
 
   useEffect(() => {
     videoPlay();
-  }, []);
+  }, [videoPlay]);
 
   return (
     <motion.div
@@ -95,7 +95,6 @@ const Main = () => {
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 24 150 28"
           xmlnsXlink="http://www.w3.org/1999/xlink"
-          viewBox="0 24 150 28"
           preserveAspectRatio="none"
         >
           <defs>
