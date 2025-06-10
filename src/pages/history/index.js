@@ -69,7 +69,7 @@ const History = () => {
   useEffect(() => {
     reset();
     dispatch(hList());
-  }, []);
+  }, [dispatch]);
 
   return (
     <AnimatePresence mode="wait">

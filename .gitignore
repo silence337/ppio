@@ -1,0 +1,12 @@
+# node_modules 
+node_modules/
+
+# 빌드 결과물
+build/
+dist/
+
+# 에디터/IDE 설정
+.vscode/
+
+# 캐시
+.cache/

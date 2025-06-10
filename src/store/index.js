@@ -1,8 +1,5 @@
-import { combineReducers, configureStore } from '@reduxjs/toolkit';
-// import { routerMiddleware, connectRouter } from 'connected-react-router';
+import { configureStore } from '@reduxjs/toolkit';
 import { createBrowserHistory } from 'history';
-import logger from 'redux-logger';
-//import todoReducer from './TodoReducer';
 import workReducer from './WorkReducer';
 import historyReducer from './HistoryReducer';
 

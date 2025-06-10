@@ -11,8 +11,7 @@ const Work = () => {
   const context = useOutletContext();
   const dispatch = useDispatch();
 
-  const [{ data: results, loading, error }, refetch] =
-    useAxios('/data/work.json');
+  const [{ data: results, loading, error }] = useAxios('/data/work.json');
   const { data: worksData } = useSelector((state) => state.work);
 
   const fallbackX = useMotionValue(0);
@@ -61,7 +60,7 @@ const Work = () => {
     const { Workspace: data } = results;
     dispatch(setData({ data }));
     reset();
-  }, [results]);
+  }, [results, dispatch]);
 
   const workList = useRef(null);
   const currentRef = useRef(null);
