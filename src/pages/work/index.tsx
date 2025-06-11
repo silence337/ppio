@@ -1,18 +1,27 @@
-import { motion, AnimatePresence, useMotionValue, useTransform } from 'framer-motion';
+import { motion, AnimatePresence, useMotionValue, MotionValue, useTransform } from 'framer-motion';
+import type { RootState, AppDispatch } from 'store';
 import React, { useRef, useState, useEffect } from 'react';
 import { useOutletContext } from 'react-router-dom';
 import useAxios from 'axios-hooks';
 import ReactScrollWheelHandler from 'react-scroll-wheel-handler';
 import { useSelector, useDispatch } from 'react-redux';
-import { setData } from 'store/WorkReducer';
-import List from 'components/work/List';
+import { pList } from 'store/WorkReducer';
+import List from 'components/work';
+
+
+interface OutletContextType {
+  x: MotionValue<number> ;
+  y: MotionValue<number>;
+}
 
 const Work = () => {
-  const context = useOutletContext();
-  const dispatch = useDispatch();
+  const context = useOutletContext<OutletContextType>();
+  const dispatch = useDispatch<AppDispatch>();
+
+  console.log(context?.x)
 
   const [{ data: results, loading, error }] = useAxios('/data/work.json');
-  const { data: worksData } = useSelector((state) => state.work);
+  const worksData = useSelector((state: RootState) => state.work);
 
   const fallbackX = useMotionValue(0);
   const fallbackY = useMotionValue(0);
@@ -57,32 +66,35 @@ const Work = () => {
     if (!results) {
       return;
     }
-    const { Workspace: data } = results;
-    dispatch(setData({ data }));
+    dispatch(pList());
     reset();
-  }, [results, dispatch]);
+  }, [results]);
 
-  const workList = useRef(null);
-  const currentRef = useRef(null);
-  const [activeNum, setActiveNum] = useState(0);
+  const workList = useRef<HTMLUListElement | null>(null);
+  const currentRef = useRef<HTMLLIElement | null>(null);
+  const [activeNum, setActiveNum] = useState<number>(0);
   const doPrev = Math.max(0, activeNum - 1);
   const doNext = Math.min(worksData.length - 1, activeNum + 1);
 
   const prev = () => {
     setActiveNum(doPrev);
-    workList.current.style.transform =
-      'translateX(-' + currentRef.current.offsetWidth * doPrev + 'px)';
+    if (workList.current && currentRef.current) {
+      workList.current.style.transform = 'translateX(-' + currentRef.current.offsetWidth * doPrev + 'px)';
+    }
   };
 
   const next = () => {
     setActiveNum(doNext);
-    workList.current.style.transform =
-      'translateX(-' + currentRef.current.offsetWidth * doNext + 'px)';
+    if (workList.current && currentRef.current) {
+      workList.current.style.transform = 'translateX(-' + currentRef.current.offsetWidth * doNext + 'px)';
+    }
   };
 
   const reset = () => {
     setActiveNum(0);
-    workList.current.style.transform = 'translateX(0)';
+    if (workList.current) {
+      workList.current.style.transform = 'translateX(0)';
+    }
   };
 
   if (loading) return <p>loading!</p>;
@@ -103,10 +115,10 @@ const Work = () => {
           downHandler={next}
           leftHandler={next}
           rightHandler={prev}
-          wheelConfig={[9, 100, 0.02]}
+          wheelConfig={[9, 100, 0.02, 1]}
         >
           <motion.div
-            style={{width: '100%', height: '100%',height: 'calc(100vh - 40px)', rotateX: rotateX, rotateY: rotateY }}
+            style={{width: '100%', height: 'calc(100vh - 40px)', rotateX: rotateX, rotateY: rotateY }}
           >
             <div className="list">
               <h3>
@@ -119,9 +131,9 @@ const Work = () => {
                 <div>loading</div>
               ) : (
                 <List
-                  worksData={worksData}
-                  ulRef={workList}
-                  currentRef={currentRef}
+                  data={worksData}
+                  ul={workList as React.RefObject<HTMLUListElement>}
+                  current={currentRef as React.RefObject<HTMLLIElement>}
                   activeNum={activeNum}
                   obj={obj}
                 />

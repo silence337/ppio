@@ -1,20 +1,24 @@
 import { motion, AnimatePresence } from 'framer-motion';
+import type { RootState, AppDispatch } from 'store'; 
 import React, { useRef, useState, useEffect } from 'react';
 import { useOutletContext } from 'react-router-dom';
 import ReactScrollWheelHandler from 'react-scroll-wheel-handler';
 import { useSelector, useDispatch } from 'react-redux';
 import { hList } from 'store/HistoryReducer';
-import List from 'components/history/List';
+import List from 'components/history';
+
+interface OutletContextType {
+  path?: string;
+}
 
 const History = () => {
-  const context = useOutletContext();
+  const context = useOutletContext<OutletContextType | undefined>();
   const pathClassName = context?.path;
-  console.log(pathClassName);
-  const dispatch = useDispatch();
-  const historyData = useSelector((state) => state.history);
-  const listRef = useRef(null);
-  const currentRef = useRef(null);
-  const bar = useRef(null);
+  const dispatch = useDispatch<AppDispatch>();
+  const historyData = useSelector((state: RootState) => state.history);
+  const listRef = useRef<HTMLUListElement | null>(null);
+  const currentRef = useRef<HTMLLIElement | null>(null);
+  const bar = useRef<HTMLSpanElement | null>(null);
   const [historyNum, setHistoryNum] = useState(0);
 
   const doUp = Math.max(0, historyNum - 1);
@@ -22,22 +26,28 @@ const History = () => {
 
   const prev = () => {
     setHistoryNum(doUp);
-    let pos = currentRef.current.offsetHeight * doUp;
-    listRef.current.style.transform = 'translateY(-' + pos + 'px)';
-    progress(pos);
+    if (currentRef.current && listRef.current) {
+      let pos = currentRef.current.offsetHeight * doUp;
+      listRef.current.style.transform = 'translateY(-' + pos + 'px)';
+      progress(pos);
+    }
     //console.log(doUp);
   };
 
   const next = () => {
     setHistoryNum(doDown);
-    let pos = currentRef.current.offsetHeight * doDown;
-    listRef.current.style.transform = 'translateY(-' + pos + 'px)';
-    progress(pos);
+    if (currentRef.current && listRef.current) {
+      let pos = currentRef.current.offsetHeight * doDown;
+      listRef.current.style.transform = 'translateY(-' + pos + 'px)';
+      progress(pos);
+    }
   };
 
   const reset = () => {
     setHistoryNum(0);
-    listRef.current.style.transform = 'translateY(0)';
+    if (listRef.current) {
+      listRef.current.style.transform = 'translateY(0)';
+    }
   };
 
   const pageVariants = {
@@ -58,9 +68,10 @@ const History = () => {
     duration: 0.6,
   };
 
-  const progress = (s) => {
+  const progress = (s: number) => {
     //100 / height * measure
     console.log(s);
+    if (!listRef.current || !bar.current) return;
     let pos = (100 / (listRef.current.offsetHeight - 442)) * s;
     bar.current.style.width = (pos < 100 ? pos : '100') + '%';
     //console.log(historyList.current.offsetHeight, windowH);
@@ -69,7 +80,7 @@ const History = () => {
   useEffect(() => {
     reset();
     dispatch(hList());
-  }, [dispatch]);
+  }, []);
 
   return (
     <AnimatePresence mode="wait">
@@ -84,7 +95,7 @@ const History = () => {
         <ReactScrollWheelHandler
           upHandler={prev}
           downHandler={next}
-          wheelConfig={[9, 100, 0.02]}
+          wheelConfig={[9, 100, 0.02, 0]}
           style={{width: '100%', height: '100%'}}
         >
           <span className="progress">
@@ -94,10 +105,10 @@ const History = () => {
             className={`list${pathClassName === 'isHistory' ? ' show' : ''}`}
           >
             <List
-              historyData={historyData}
-              listRef={listRef}
-              currentRef={currentRef}
-              historyNum={historyNum}
+              data={historyData}
+              list={listRef as React.RefObject<HTMLUListElement>}
+              current={currentRef as React.RefObject<HTMLLIElement>}
+              number={historyNum}
             />
             <span className="circle"></span>
           </div>

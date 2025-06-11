@@ -1,21 +1,31 @@
 import React, { useState, useEffect,  } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
-import { motion, useMotionValue } from 'framer-motion';
+import { motion, useMotionValue, MotionValue  } from 'framer-motion';
 import Header from '../components/layout/Header';
 
+interface HistoryContext {
+  path: 'isHistory';
+}
 
-export default function MainLayout() {
+interface WorkContext {
+  x: MotionValue<number>;
+  y: MotionValue<number>;
+}
+
+type LayoutContext = HistoryContext | WorkContext | null;
+
+const MainLayout = () => {
   const x = useMotionValue(100);
   const y = useMotionValue(100);
 
-  const handleMouse = (event) => {
+  const handleMouse = (event: React.MouseEvent<HTMLDivElement>) => {
     x.set(event.pageX);
     y.set(event.pageY);
   };
 
   const location = useLocation();
   const [path, setPath] = useState('');
-  const [contextData, setContextData] = useState(null);
+  const [contextData, setContextData] = useState<LayoutContext>(null);
 
   useEffect(() => {
     const pathname = location.pathname;
@@ -28,12 +38,12 @@ export default function MainLayout() {
 
     } else if (pathname === "/work") {
       setPath('isWork');
-      setContextData({ x, y });
+      setContextData({ x, y } as WorkContext);
 
     } else {
       setPath('');
     }
-  }, [location.pathname, x, y]);
+  }, [location.pathname]);
 
   return (
     <motion.div
@@ -46,3 +56,4 @@ export default function MainLayout() {
     </motion.div>
   );
 }
+export default MainLayout;

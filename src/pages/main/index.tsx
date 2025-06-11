@@ -2,10 +2,10 @@ import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import Video from 'assets/resources/m.mp4';
 
-const Main = () => {
-  const video = useRef(null);
-  const wave = useRef(null);
-  const [isPlaying, setIsPlaying] = useState(false);
+const Main: React.FC = () => {
+  const video = useRef<HTMLVideoElement | null>(null);
+  const wave = useRef<HTMLDivElement | null>(null);
+  const [isPlaying, setIsPlaying] = useState<boolean>(false);
 
   const pageVariants = {
     initial: {
@@ -35,6 +35,9 @@ const Main = () => {
     if (isPlaying) {
       return;
     }
+    if (!video.current) {
+      return;
+    }
 
     let play = video.current.play();
 
@@ -43,21 +46,23 @@ const Main = () => {
         .then((_) => {
           setIsPlaying(true);
 
-          video.current.addEventListener('timeupdate', (e) => {
+          video.current?.addEventListener('timeupdate', (e: Event) => {
+            const target = e.target as HTMLVideoElement;
+
             if (!wave.current) {
               return;
             }
-            let currentTime = e.target.currentTime;
-            if (e.target.ended) {
+
+            const currentTime = target.currentTime;
+            if (target.ended) {
               setIsPlaying(false);
             }
-            //console.log(currentTime);
             if (currentTime > 2) {
               return;
             }
             wave.current.style.transform =
               'translateY(-' + currentTime * 50 + 'px)';
-            //console.log(e.target.currentTime);
+            //console.log(target.currentTime);
           });
         })
         .catch((error) => {});
