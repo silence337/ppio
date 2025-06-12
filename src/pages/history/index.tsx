@@ -8,12 +8,12 @@ import { hList } from 'store/HistoryReducer';
 import List from 'components/history';
 
 interface OutletContextType {
-  path?: string;
+  path: string;
 }
 
 const History = () => {
-  const context = useOutletContext<OutletContextType | undefined>();
-  const pathClassName = context?.path;
+  const context = useOutletContext<OutletContextType>();
+  const pathClassName = context.path;
   const dispatch = useDispatch<AppDispatch>();
   const historyData = useSelector((state: RootState) => state.history);
   const listRef = useRef<HTMLUListElement | null>(null);

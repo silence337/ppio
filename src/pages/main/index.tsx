@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import Video from 'assets/resources/m.mp4';
 
-const Main: React.FC = () => {
+const Main = () => {
   const video = useRef<HTMLVideoElement | null>(null);
   const wave = useRef<HTMLDivElement | null>(null);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);

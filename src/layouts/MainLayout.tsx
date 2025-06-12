@@ -4,7 +4,7 @@ import { motion, useMotionValue, MotionValue  } from 'framer-motion';
 import Header from '../components/layout/Header';
 
 interface HistoryContext {
-  path: 'isHistory';
+  path: string;
 }
 
 interface WorkContext {
