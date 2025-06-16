@@ -1,4 +1,4 @@
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, Transition, AnimatePresence } from 'framer-motion';
 import type { RootState, AppDispatch } from 'store'; 
 import React, { useRef, useState, useEffect } from 'react';
 import { useOutletContext } from 'react-router-dom';
@@ -61,9 +61,9 @@ const History = () => {
       opacity: 0,
     },
   };
-  const pageTransition = {
-    type: 'tween',
-    ease: 'linear',
+  const pageTransition: Transition = {
+    type: "tween",
+    ease: "easeInOut",
     delay: 0,
     duration: 0.6,
   };

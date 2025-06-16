@@ -1,4 +1,4 @@
-import { motion, AnimatePresence, useMotionValue, MotionValue, useTransform } from 'framer-motion';
+import { motion, Transition, AnimatePresence, useMotionValue, MotionValue, useTransform } from 'framer-motion';
 import type { RootState, AppDispatch } from 'store';
 import React, { useRef, useState, useEffect } from 'react';
 import { useOutletContext } from 'react-router-dom';
@@ -56,7 +56,7 @@ const Work = () => {
       scale: 0.8,
     },
   };
-  const pageTransition = {
+  const pageTransition: Transition = {
     delay: 0,
     type: 'spring',
   };

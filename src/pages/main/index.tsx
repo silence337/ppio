@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
-import { motion } from 'framer-motion';
+import { motion, Transition } from 'framer-motion';
 import Video from 'assets/resources/m.mp4';
 
 const Main = () => {
@@ -25,7 +25,7 @@ const Main = () => {
       },
     },
   };
-  const pageTransition = {
+  const pageTransition: Transition = {
     type: 'tween',
     delay: 0.4,
     duration: 1.4,
