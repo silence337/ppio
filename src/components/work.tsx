@@ -24,13 +24,13 @@ interface WorkListProps {
   };
 }
 
-const WorkList: React.FC<WorkListProps> = ({ 
+const WorkList = ({ 
   data = [], 
   ul, 
   current, 
   activeNum, 
   obj 
-}) => {
+}: WorkListProps) => {
   const { thumX, thumY, tX, tY } = obj;
 
   const url = (e: string) => {

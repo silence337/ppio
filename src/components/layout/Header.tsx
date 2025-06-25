@@ -4,7 +4,7 @@ interface HeaderProps {
   pathClassName?: string;
 }
 
-const Header: React.FC<HeaderProps> = ({ pathClassName = '' }) => {
+const Header = ({ pathClassName = '' }:HeaderProps) => {
   return (
     <header className={`pageHeader navigation ${pathClassName}`}>
       <h1>

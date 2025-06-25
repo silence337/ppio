@@ -14,12 +14,12 @@ interface HistoryListProps {
   number: number;
 }
 
-const HistoryList: React.FC<HistoryListProps> = ({
+const HistoryList = ({
   data = [],
   list,
   current,
   number,
-}) => {
+}: HistoryListProps) => {
   return (
     <ul ref={list}>
       {data?.map((item, idx) => {
@@ -27,7 +27,7 @@ const HistoryList: React.FC<HistoryListProps> = ({
         const { year, type, work } = item;
         return (
           <li
-            className={`${active ? 'active' : ''}`}
+            className={active ? 'active' : ''}
             ref={active ? current : null}
             key={idx}
           >
