@@ -1,17 +1,6 @@
 import axios from 'axios';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-
-
-export interface PortfolioItem {
-  id: number;
-  title: string;
-  thum: string;
-  year: string;
-  description: string[];
-  tools: string;
-  link: string;
-  copy: string;
-}
+import type { PortfolioItem } from '../types/Common';
 
 interface WorkResponse {
   Workspace: PortfolioItem[];
@@ -33,11 +22,13 @@ export const workSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(pList.fulfilled, (state, action: PayloadAction<PortfolioItem[]>) => {
-      return [...action.payload];
-    });
+    builder.addCase(
+      pList.fulfilled,
+      (state, action: PayloadAction<PortfolioItem[]>) => {
+        return [...action.payload];
+      }
+    );
   },
 });
 
 export default workSlice.reducer;
-

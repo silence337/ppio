@@ -1,15 +1,5 @@
 import { motion } from 'framer-motion';
-
-interface PortfolioItem {
-  id: number;
-  title: string;
-  thum: string;
-  year: string;
-  description: string[];
-  tools: string;
-  link: string;
-  copy: string;
-}
+import type { PortfolioItem } from '../types/Common';
 
 interface WorkListProps {
   data: PortfolioItem[];
@@ -24,12 +14,12 @@ interface WorkListProps {
   };
 }
 
-const WorkList = ({ 
-  data = [], 
-  ul, 
-  current, 
-  activeNum, 
-  obj 
+const WorkList = ({
+  data = [],
+  ul,
+  current,
+  activeNum,
+  obj,
 }: WorkListProps) => {
   const { thumX, thumY, tX, tY } = obj;
 
@@ -39,7 +29,6 @@ const WorkList = ({
     }
     window.open(e);
   };
-  
 
   return (
     <ul ref={ul}>
@@ -52,16 +41,17 @@ const WorkList = ({
             className={`${active ? 'active' : ''}`}
             ref={active ? current : null}
           >
-            <a href={undefined}
+            <a
+              href={undefined}
               onClick={() => url(link)}
-              rel="noopener noreferrer"
+              rel='noopener noreferrer'
               style={{ perspective: 400 }}
             >
               <figure>
                 <motion.div
                   style={active ? { translateX: thumX, translateY: thumY } : {}}
                 >
-                  <img src={`/data/${thum}.jpg`} alt="" />
+                  <img src={`/data/${thum}.jpg`} alt='' />
                 </motion.div>
               </figure>
               <motion.div
@@ -71,16 +61,16 @@ const WorkList = ({
                   <dt>
                     <i>{year}</i> {title}
                   </dt>
-                  <dd className="text">
+                  <dd className='text'>
                     {description?.map((text, i) => (
                       <span key={i}>{text}</span>
                     ))}
                   </dd>
-                  <dd className="tools"> {tools} </dd>
+                  <dd className='tools'> {tools} </dd>
                 </dl>
               </motion.div>
             </a>
-            <span className="copy">{copy}</span>
+            <span className='copy'>{copy}</span>
           </li>
         );
       })}

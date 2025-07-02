@@ -10,14 +10,14 @@ export const router = createBrowserRouter([
     element: <MainLayout />,
     children: [
       { index: true, element: <Main /> },
-      { 
-        path: 'work', 
+      {
+        path: 'work',
         element: <Work />,
         //loader: () => ({ title: "첫 번째 페이지" }),
       },
-      { 
-        path: 'history', 
-        element: <History /> 
+      {
+        path: 'history',
+        element: <History />,
       },
     ],
   },

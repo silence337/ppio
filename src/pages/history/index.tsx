@@ -1,11 +1,11 @@
 import { motion, Transition, AnimatePresence } from 'framer-motion';
-import type { RootState, AppDispatch } from 'store'; 
+import type { RootState, AppDispatch } from 'store';
 import React, { useRef, useState, useEffect } from 'react';
 import { useOutletContext } from 'react-router-dom';
 import ReactScrollWheelHandler from 'react-scroll-wheel-handler';
 import { useSelector, useDispatch } from 'react-redux';
 import { hList } from 'store/HistoryReducer';
-import List from 'components/history';
+import List from 'components/History';
 
 interface OutletContextType {
   path: string;
@@ -62,8 +62,8 @@ const History = () => {
     },
   };
   const pageTransition: Transition = {
-    type: "tween",
-    ease: "easeInOut",
+    type: 'tween',
+    ease: 'easeInOut',
     delay: 0,
     duration: 0.6,
   };
@@ -83,12 +83,12 @@ const History = () => {
   }, []);
 
   return (
-    <AnimatePresence mode="wait">
+    <AnimatePresence mode='wait'>
       <motion.div
         className={'history'}
-        initial="initial"
-        animate="in"
-        exit="exit"
+        initial='initial'
+        animate='in'
+        exit='exit'
         variants={pageVariants}
         transition={pageTransition}
       >
@@ -96,9 +96,9 @@ const History = () => {
           upHandler={prev}
           downHandler={next}
           wheelConfig={[9, 100, 0.02, 0]}
-          style={{width: '100%', height: '100%'}}
+          style={{ width: '100%', height: '100%' }}
         >
-          <span className="progress">
+          <span className='progress'>
             <span ref={bar}></span>
           </span>
           <div
@@ -110,7 +110,7 @@ const History = () => {
               current={currentRef as React.RefObject<HTMLLIElement>}
               number={historyNum}
             />
-            <span className="circle"></span>
+            <span className='circle'></span>
           </div>
         </ReactScrollWheelHandler>
       </motion.div>

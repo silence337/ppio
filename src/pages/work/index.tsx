@@ -1,4 +1,11 @@
-import { motion, Transition, AnimatePresence, useMotionValue, MotionValue, useTransform } from 'framer-motion';
+import {
+  motion,
+  Transition,
+  AnimatePresence,
+  useMotionValue,
+  MotionValue,
+  useTransform,
+} from 'framer-motion';
 import type { RootState, AppDispatch } from 'store';
 import React, { useRef, useState, useEffect } from 'react';
 import { useOutletContext } from 'react-router-dom';
@@ -6,11 +13,10 @@ import useAxios from 'axios-hooks';
 import ReactScrollWheelHandler from 'react-scroll-wheel-handler';
 import { useSelector, useDispatch } from 'react-redux';
 import { pList } from 'store/WorkReducer';
-import List from 'components/work';
-
+import List from 'components/Work';
 
 interface OutletContextType {
-  x: MotionValue<number> ;
+  x: MotionValue<number>;
   y: MotionValue<number>;
 }
 
@@ -18,7 +24,7 @@ const Work = () => {
   const context = useOutletContext<OutletContextType>();
   const dispatch = useDispatch<AppDispatch>();
 
-  console.log(context?.x)
+  console.log(context?.x);
 
   const [{ data: results, loading, error }] = useAxios('/data/work.json');
   const worksData = useSelector((state: RootState) => state.work);
@@ -60,7 +66,6 @@ const Work = () => {
     delay: 0,
     type: 'spring',
   };
-  
 
   useEffect(() => {
     if (!results) {
@@ -79,14 +84,16 @@ const Work = () => {
   const prev = () => {
     setActiveNum(doPrev);
     if (workList.current && currentRef.current) {
-      workList.current.style.transform = 'translateX(-' + currentRef.current.offsetWidth * doPrev + 'px)';
+      workList.current.style.transform =
+        'translateX(-' + currentRef.current.offsetWidth * doPrev + 'px)';
     }
   };
 
   const next = () => {
     setActiveNum(doNext);
     if (workList.current && currentRef.current) {
-      workList.current.style.transform = 'translateX(-' + currentRef.current.offsetWidth * doNext + 'px)';
+      workList.current.style.transform =
+        'translateX(-' + currentRef.current.offsetWidth * doNext + 'px)';
     }
   };
 
@@ -101,12 +108,12 @@ const Work = () => {
   if (error) return <p>Error!</p>;
 
   return (
-    <AnimatePresence mode="wait">
+    <AnimatePresence mode='wait'>
       <motion.div
-        className="workCircle"
-        initial="initial"
-        animate="in"
-        exit="exit"
+        className='workCircle'
+        initial='initial'
+        animate='in'
+        exit='exit'
         variants={pageVariants}
         transition={pageTransition}
       >
@@ -118,13 +125,18 @@ const Work = () => {
           wheelConfig={[9, 100, 0.02, 1]}
         >
           <motion.div
-            style={{width: '100%', height: 'calc(100vh - 40px)', rotateX: rotateX, rotateY: rotateY }}
+            style={{
+              width: '100%',
+              height: 'calc(100vh - 40px)',
+              rotateX: rotateX,
+              rotateY: rotateY,
+            }}
           >
-            <div className="list">
+            <div className='list'>
               <h3>
                 Work<i></i>
               </h3>
-              <p className="info">
+              <p className='info'>
                 리뉴얼 및 서비스종료 등의 프로젝트는 제외 되었습니다.
               </p>
               {loading ? (
@@ -139,12 +151,12 @@ const Work = () => {
                 />
               )}
 
-              <span className="circle"></span>
-              <motion.div className="circleBack" style={{ translateX: boxY }} />
+              <span className='circle'></span>
+              <motion.div className='circleBack' style={{ translateX: boxY }} />
             </div>
           </motion.div>
         </ReactScrollWheelHandler>
-        <motion.div className="box" />
+        <motion.div className='box' />
       </motion.div>
     </AnimatePresence>
   );

@@ -6,15 +6,16 @@ import 'assets/scss/welcome.scss';
 import AppRouter from './routes/AppRouter';
 import reportWebVitals from './reportWebVitals';
 
-
-const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
+const root = ReactDOM.createRoot(
+  document.getElementById('root') as HTMLElement
+);
 
 root.render(
   <React.StrictMode>
     <Provider store={store}>
       <AppRouter />
     </Provider>
-  </React.StrictMode>,
+  </React.StrictMode>
 );
 
 reportWebVitals();

@@ -1,11 +1,4 @@
-interface HistoryItem {
-  year: string;
-  type: string;
-  work: {
-    subj: string;
-    text: string[];
-  }[];
-}
+import type { HistoryItem } from '../types/Common';
 
 interface HistoryListProps {
   data: HistoryItem[];
@@ -32,8 +25,8 @@ const HistoryList = ({
             key={idx}
           >
             <strong>{year}</strong>
-            <span className="type">{type}</span>
-            <div className="textArea">
+            <span className='type'>{type}</span>
+            <div className='textArea'>
               {work?.map((cont, i) => (
                 <dl key={i}>
                   <dt>{cont.subj}</dt>

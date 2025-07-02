@@ -1,17 +1,6 @@
 import axios from 'axios';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-
-export interface HistoryWorkItem {
-  subj: string;
-  text: string[];
-}
-
-export interface HistoryItem {
-  id: number;
-  year: string;
-  type: string;
-  work: HistoryWorkItem[];
-}
+import type { HistoryItem } from '../types/Common';
 
 const initialState: HistoryItem[] = [];
 
@@ -28,9 +17,12 @@ export const historySlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(hList.fulfilled, (state, action: PayloadAction<HistoryItem[]>) => {
-      return [...action.payload];
-    });
+    builder.addCase(
+      hList.fulfilled,
+      (state, action: PayloadAction<HistoryItem[]>) => {
+        return [...action.payload];
+      }
+    );
   },
 });
 
