@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
-import workReducer from './WorkReducer';
-import historyReducer from './HistoryReducer';
+import workReducer from './WorkSlice';
+import historyReducer from './HistorySlice';
 
 export const store = configureStore({
   reducer: {

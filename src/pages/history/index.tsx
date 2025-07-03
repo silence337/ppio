@@ -4,7 +4,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import { useOutletContext } from 'react-router-dom';
 import ReactScrollWheelHandler from 'react-scroll-wheel-handler';
 import { useSelector, useDispatch } from 'react-redux';
-import { hList } from 'store/HistoryReducer';
+import { hList } from 'store/HistorySlice';
 import List from 'components/History';
 
 interface OutletContextType {

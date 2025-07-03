@@ -12,7 +12,7 @@ import { useOutletContext } from 'react-router-dom';
 import useAxios from 'axios-hooks';
 import ReactScrollWheelHandler from 'react-scroll-wheel-handler';
 import { useSelector, useDispatch } from 'react-redux';
-import { pList } from 'store/WorkReducer';
+import { pList } from 'store/WorkSlice';
 import List from 'components/Work';
 
 interface OutletContextType {

@@ -4,11 +4,11 @@ interface HeaderProps {
   pathClassName?: string;
 }
 
-const Header = ({ pathClassName = '' }:HeaderProps) => {
+const Header = ({ pathClassName = '' }: HeaderProps) => {
   return (
     <header className={`pageHeader navigation ${pathClassName}`}>
       <h1>
-        <Link to="/">
+        <Link to='/'>
           <strong>
             <em>Work</em>
           </strong>{' '}
@@ -22,7 +22,7 @@ const Header = ({ pathClassName = '' }:HeaderProps) => {
         <ul>
           <li>
             <NavLink
-              to="/work"
+              to='/work'
               className={({ isActive }) => (isActive ? 'selected' : '')}
             >
               WORK
@@ -30,7 +30,7 @@ const Header = ({ pathClassName = '' }:HeaderProps) => {
           </li>
           <li>
             <NavLink
-              to="/history"
+              to='/history'
               className={({ isActive }) => (isActive ? 'selected' : '')}
             >
               HISTORY
