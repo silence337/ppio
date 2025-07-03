@@ -73,7 +73,7 @@ const Work = () => {
     }
     dispatch(pList());
     reset();
-  }, [results]);
+  }, [dispatch, results]);
 
   const workList = useRef<HTMLUListElement | null>(null);
   const currentRef = useRef<HTMLLIElement | null>(null);

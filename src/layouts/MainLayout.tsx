@@ -1,6 +1,6 @@
-import React, { useState, useEffect,  } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
-import { motion, useMotionValue, MotionValue  } from 'framer-motion';
+import { motion, useMotionValue, MotionValue } from 'framer-motion';
 import Header from '../components/layout/Header';
 
 interface HistoryContext {
@@ -30,20 +30,18 @@ const MainLayout = () => {
   useEffect(() => {
     const pathname = location.pathname;
 
-    if (pathname === "/") {
+    if (pathname === '/') {
       setPath('isMain');
-    } else if (pathname === "/history") {
+    } else if (pathname === '/history') {
       setPath('isHistory');
       setContextData({ path: 'isHistory' });
-
-    } else if (pathname === "/work") {
+    } else if (pathname === '/work') {
       setPath('isWork');
       setContextData({ x, y } as WorkContext);
-
     } else {
       setPath('');
     }
-  }, [location.pathname]);
+  }, [location.pathname, x, y]);
 
   return (
     <motion.div
@@ -55,5 +53,5 @@ const MainLayout = () => {
       <Outlet context={contextData} />
     </motion.div>
   );
-}
+};
 export default MainLayout;
